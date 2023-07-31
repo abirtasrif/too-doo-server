@@ -1,22 +1,21 @@
 const express = require("express");
+const {
+  postNote,
+  getAllNotes,
+  getSingleNote,
+} = require("../controllers/projectController");
 
 //router
 const router = express.Router();
 
 //GET all notes
-router.get("/", (req, res) => {
-  res.json({ message: "GET all notes" });
-});
+router.get("/", getAllNotes);
 
 //GET single notes
-router.get("/:id", (req, res) => {
-  res.json({ message: "GET a single note" });
-});
+router.get("/:id", getSingleNote);
 
 // POST a new note
-router.post("/", (req, res) => {
-  res.json({ message: "POST a new note" });
-});
+router.post("/", postNote);
 
 // DELETE a new note
 router.delete("/:id", (req, res) => {
