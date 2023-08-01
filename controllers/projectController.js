@@ -38,8 +38,6 @@ const postNote = async (req, res) => {
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
-
-  res.json({ message: "POST a new note" });
 };
 
 //delete a note
