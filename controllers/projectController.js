@@ -43,11 +43,39 @@ const postNote = async (req, res) => {
 };
 
 //delete a note
+const deleteNote = async (req, res) => {
+  const { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: "Invalid Id" });
+  }
+
+  const project = await Notebook.findOneAndDelete({ _id: id });
+
+  if (!project) {
+    return res.status(400).json({ error: "No projects found" });
+  }
+
+  res.status(200).json(project);
+};
 
 //update a note
+const updateNote = async (req, res) => {
+  const { id } = req.params;
+
+  const project = await Notebook.findOneAndUpdate({ _id: id }, { ...req.body });
+
+  if (!project) {
+    return res.status(400).json({ error: "No projects found" });
+  }
+
+  res.status(200).json(project);
+};
 
 module.exports = {
   postNote,
   getAllNotes,
   getSingleNote,
+  deleteNote,
+  updateNote,
 };

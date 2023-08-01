@@ -3,6 +3,8 @@ const {
   postNote,
   getAllNotes,
   getSingleNote,
+  deleteNote,
+  updateNote,
 } = require("../controllers/projectController");
 
 //router
@@ -18,13 +20,9 @@ router.get("/:id", getSingleNote);
 router.post("/", postNote);
 
 // DELETE a new note
-router.delete("/:id", (req, res) => {
-  res.json({ message: "DELETE a note" });
-});
+router.delete("/:id", deleteNote);
 
 // UPDATE a new note
-router.patch("/:id", (req, res) => {
-  res.json({ message: "UPDATE a note" });
-});
+router.patch("/:id", updateNote);
 
 module.exports = router;
