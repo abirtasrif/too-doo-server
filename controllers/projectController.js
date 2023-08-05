@@ -27,11 +27,27 @@ const getSingleNote = async (req, res) => {
 
 //post new note
 const postNote = async (req, res) => {
-  const data = req.body;
+  const { title, content } = req.body;
+
+  let emptyFields = [];
+
+  if (!title) {
+    emptyFields.push("title");
+  }
+
+  if (!content) {
+    emptyFields.push("content");
+  }
+
+  if (emptyFields.length > 0) {
+    return res
+      .status(400)
+      .json({ error: "Please fill all fields", emptyFields });
+  }
 
   try {
     const note = await Notebook.create({
-      ...data,
+      ...req.body,
     });
 
     res.status(200).json(note);
