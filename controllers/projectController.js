@@ -77,7 +77,29 @@ const deleteNote = async (req, res) => {
 const updateNote = async (req, res) => {
   const { id } = req.params;
 
-  const project = await Notebook.findOneAndUpdate({ _id: id }, { ...req.body });
+  const { title, content } = req.body;
+
+  let emptyFields = [];
+
+  if (!title) {
+    emptyFields.push("title");
+  }
+
+  if (!content) {
+    emptyFields.push("content");
+  }
+
+  if (emptyFields.length > 0) {
+    return res
+      .status(400)
+      .json({ error: "Please fill all fields", emptyFields });
+  }
+
+  const project = await Notebook.findOneAndUpdate(
+    { _id: id },
+    { ...req.body },
+    { new: true }
+  );
 
   if (!project) {
     return res.status(400).json({ error: "No projects found" });
