@@ -3,6 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 const notesRoute = require("./routes/notesRoute");
+const userRoutes = require("./routes/userRoute");
 
 //port
 const port = process.env.PORT || 4000;
@@ -21,6 +22,7 @@ app.use((req, res, next) => {
 
 //routes
 app.use("/api/notes", notesRoute);
+app.use("/api/user", userRoutes);
 
 //mongodb connection
 mongoose.set("strictQuery", false);
