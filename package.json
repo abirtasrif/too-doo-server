@@ -18,6 +18,9 @@
     "express",
     "mongo"
   ],
+  "engines": {
+    "node": ">=18"
+  },
   "author": "Abir Tasrif Anto",
   "license": "ISC",
   "bugs": {

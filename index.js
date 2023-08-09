@@ -25,9 +25,12 @@ app.use("/api/notes", notesRoute);
 app.use("/api/user", userRoutes);
 
 //mongodb connection
-mongoose.set("strictQuery", false);
+// mongoose.set("strictQuery", false);
 mongoose
-  .connect(process.env.MONGO_URI)
+  .connect(process.env.MONGO_URI, {
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+  })
   .then(() => {
     //request listening
     app.listen(port, () => {
